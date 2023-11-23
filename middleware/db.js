@@ -8,6 +8,12 @@ const dbPassword = process.env.STACKHERO_MYSQL_ROOT_PASSWORD || ''
 const db = new Sequelize(dbName, 'root', dbPassword, {
     host: dbHost,
     dialect: 'mysql',
+    "ssl": true,
+    "dialectOptions": {
+        "ssl": {
+            "require": true
+        }
+    }
 
 })
 
