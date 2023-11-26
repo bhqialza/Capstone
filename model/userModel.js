@@ -9,6 +9,9 @@ const User = db.define('tbl_users', {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    otp: DataTypes.INTEGER,
+    isVerified: DataTypes.BOOLEAN,
 }, {
     freezeTableName: true,
 })

@@ -18,3 +18,5 @@ const db = new Sequelize(dbName, 'root', dbPassword, {
 })
 
 export default db;
+
+

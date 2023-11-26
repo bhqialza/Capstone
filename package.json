@@ -20,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.3",
     "nodemon": "^3.0.1",
-    "sequelize": "^6.35.1"
+    "sequelize": "^6.35.1",
+    "mailgun.js": "^9.2.0"
   }
 }
