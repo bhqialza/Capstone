@@ -5,7 +5,7 @@ dotenv.config();
 
 const { DataTypes } = Sequelize;
 
-const User = db.define('tbl_users', {
+const User = db.define('tbl_user', {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
