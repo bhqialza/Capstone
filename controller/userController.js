@@ -11,6 +11,7 @@ const salt = bcrypt.genSaltSync(saltRounds);
 export const createUser = async (req, res) => {
     try {
         const { username, email, phone, password, confirmPassword } = req.body;
+        console.log(phone);
         if (password === confirmPassword) {
             const emailExist = await User.findOne({ where: { email } });
             if (emailExist) {
