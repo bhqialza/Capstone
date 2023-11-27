@@ -1,0 +1,240 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/LANGARIRANO/capstone/1.0.0
+  - description: TrashArt API
+    url: https://protected-wildwood-76190-32f8f3b83dd9.herokuapp.com/
+info:
+  description: This is a TrashArt API
+  version: "1.0.0"
+  title: TrashArt API
+tags:
+  - name: users
+    description: Operations available to regular users
+paths:
+  /:
+    get:
+      tags:
+        - users
+      summary: index
+      operationId: checkAPI
+      description: index
+      responses:
+        '200':
+          description: API RUNNING
+
+  /user/register:
+    post:
+      tags:
+        - users
+      summary: Register a new user
+      operationId: registerUser
+      description: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/register'
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '409':
+          description: Email already exists
+                
+  /user/login:
+    post:
+      tags:
+        - users
+      summary: Login a user
+      operationId: loginUser
+      description: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: User logged in
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '401':
+          description: Invalid credentials
+  /user/getusers:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      operationId: getUsers
+      description: Get all users
+      responses:
+        '200':
+          description: All users
+    
+  /user/verify:
+    post:
+      tags:
+        - users
+      summary: Verify user
+      operationId: verifyUser
+      description: Verify user
+      parameters:
+        - name: email
+          in: query
+          description: email
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/verify'
+      responses:
+        '200':
+          description: User verified
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '401':
+          description: Invalid credentials
+
+  /user/forgotpassword:
+    post:
+      tags:
+        - users
+      summary: Forgot password
+      operationId: forgotPassword
+      description: Forgot password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User verified
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '401':
+          description: Invalid credentials
+
+  /user/resetpassword:
+    post:
+      tags:
+        - users
+      summary: Reset password
+      operationId: resetPassword
+      description: Reset password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User verified
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '401':
+          description: Invalid credentials
+
+  /user/changepassword:
+    post:
+      tags:
+        - users
+      summary: Change password
+      operationId: changePassword
+      description: Change password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User verified
+        '400':
+          description: 'Please fill all fields, or user already exists'
+        '401':
+          description: Invalid credentials
+
+  /user/updateprofile:
+    post:
+      tags:
+        - users
+      summary: Update profile
+      operationId: updateProfile
+      description: Update profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description:
+
+components:
+  schemas:
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        password:
+          type: string
+          format: password
+          example: password123
+          
+    register:
+      type: object
+      required:
+        - username
+        - email
+        - password
+        - phone
+        - confirmPassword
+      properties:
+        username:
+          type: string
+          example: test user
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        phone:
+          type: string
+          example: "081234567890"
+        password:
+          type: string
+          format: password
+          example: password123
+        confirmPassword:
+          type: string
+          format: password
+          example: password123
+    
+    verify:
+      type: object
+      required:
+        - otp
+      properties:
+        otp:
+          type: string
+          format: number
+          example: 123456
