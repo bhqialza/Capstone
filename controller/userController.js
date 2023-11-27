@@ -146,7 +146,8 @@ export const createUser = async (req, res) => {
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ where: { email, isVerified: true } });
+        // const user = await User.findOne({ where: { email, isVerified: true } });
+        const user = await User.findOne({ where: { email } });
         if (user) {
             const match = await bcrypt.compare(password, user.password);
             if (match) {
