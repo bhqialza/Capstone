@@ -8,13 +8,63 @@ dotenv.config();
 const saltRounds = process.env.SALT || 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
+// export const createUser = async (req, res) => {
+//     try {
+//         const { username, email, phone, password, confirmPassword } = req.body;
+//         if (!username || !email || !phone || !password || !confirmPassword) return res.status(400).json({
+//             status: "fail",
+//             msg: "Please fill all the fields"
+//         })
+//         if (password === confirmPassword) {
+//             const emailExist = await User.findOne({ where: { email } });
+//             if (emailExist) {
+//                 return res.status(409).json({
+//                     status: "fail",
+//                     msg: "email already exists"
+//                 })
+//             }
+//             const otp = Math.floor(100000 + Math.random() * 900000);
+//             const data = {
+//                 username,
+//                 email,
+//                 phone,
+//                 password: await bcrypt.hash(password, salt),
+//                 otp,
+//                 isVerified: false
+//             }
+//             sendEmail(email, otp);
+//             const response = await User.create(data);
+//             if (!response) return res.status(400).json({
+//                 status: "fail",
+//                 msg: "failed to create user"
+//             })
+//             return res.status(201).json({
+//                 status: "success",
+//                 msg: "user created",
+//                 email: response.email
+//             })
+//         }
+//         else {
+//             return res.status(422).json({
+//                 status: "fail",
+//                 msg: "password and confirm password does not match"
+//             })
+
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
 export const createUser = async (req, res) => {
     try {
         const { username, email, phone, password, confirmPassword } = req.body;
-        if (!username || !email || !phone || !password || !confirmPassword) return res.status(400).json({
-            status: "fail",
-            msg: "Please fill all the fields"
-        })
+        if (!username || !email || !phone || !password || !confirmPassword) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "please fill all fields"
+            })
+        }
         if (password === confirmPassword) {
             const emailExist = await User.findOne({ where: { email } });
             if (emailExist) {
@@ -23,16 +73,12 @@ export const createUser = async (req, res) => {
                     msg: "email already exists"
                 })
             }
-            const otp = Math.floor(100000 + Math.random() * 900000);
             const data = {
                 username,
                 email,
                 phone,
-                password: await bcrypt.hash(password, salt),
-                otp,
-                isVerified: false
+                password: await bcrypt.hash(password, salt)
             }
-            sendEmail(email, otp);
             const response = await User.create(data);
             if (!response) return res.status(400).json({
                 status: "fail",
@@ -40,12 +86,11 @@ export const createUser = async (req, res) => {
             })
             return res.status(201).json({
                 status: "success",
-                msg: "user created",
-                email: response.email
+                msg: "user created"
             })
         }
         else {
-            return res.status(422).json({
+            return res.status(400).json({
                 status: "fail",
                 msg: "password and confirm password does not match"
             })
@@ -56,44 +101,45 @@ export const createUser = async (req, res) => {
     }
 }
 
-export const verifyUser = async (req, res) => {
-    try {
-        const email = req.query.email;
-        const { otp } = req.body;
-        if (!email || !otp) return res.status(400).json({
-            status: "fail",
-            msg: "Please fill all the fields"
-        })
-        const user = await User.findOne({ where: { email } });
-        if (user) {
-            if (otp == user.otp) {
-                const response = await User.update({ isVerified: true, otp: null }, { where: { email } });
-                if (!response) return res.status(400).json({
-                    status: "fail",
-                    msg: "failed to verify user"
-                })
-                return res.status(200).json({
-                    status: "success",
-                    msg: "user verified"
-                })
-            }
-            else {
-                return res.status(400).json({
-                    status: "fail",
-                    msg: "Wrong OTP"
-                })
-            }
-        }
-        else {
-            return res.status(404).json({
-                status: "fail",
-                msg: "user does not exist"
-            })
-        }
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+
+// export const verifyUser = async (req, res) => {
+//     try {
+//         const email = req.query.email;
+//         const { otp } = req.body;
+//         if (!email || !otp) return res.status(400).json({
+//             status: "fail",
+//             msg: "Please fill all the fields"
+//         })
+//         const user = await User.findOne({ where: { email } });
+//         if (user) {
+//             if (otp == user.otp) {
+//                 const response = await User.update({ isVerified: true, otp: null }, { where: { email } });
+//                 if (!response) return res.status(400).json({
+//                     status: "fail",
+//                     msg: "failed to verify user"
+//                 })
+//                 return res.status(200).json({
+//                     status: "success",
+//                     msg: "user verified"
+//                 })
+//             }
+//             else {
+//                 return res.status(400).json({
+//                     status: "fail",
+//                     msg: "Wrong OTP"
+//                 })
+//             }
+//         }
+//         else {
+//             return res.status(404).json({
+//                 status: "fail",
+//                 msg: "user does not exist"
+//             })
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
 
 
 
