@@ -9,9 +9,13 @@ info:
   description: This is a TrashArt API
   version: "1.0.0"
   title: TrashArt API
+
+security:
+  - bearerAuth: []
 tags:
   - name: users
     description: Operations available to regular users
+
 paths:
   /:
     get:
@@ -75,6 +79,21 @@ paths:
       responses:
         '200':
           description: All users
+
+    /user/profile:
+    get:
+      tags:
+        - users
+      summary: Get user profile
+      operationId: getUserProfile
+      description: Get user profile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User profile
+        '401':
+          description: Invalid credentials
     
   /user/verify:
     post:
@@ -185,6 +204,11 @@ paths:
           description:
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     UserLogin:
       type: object
@@ -238,3 +262,4 @@ components:
           type: string
           format: number
           example: 123456
+
