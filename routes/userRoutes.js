@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getUsers, loginUser } from '../controller/userController.js';
+import { createUser, getUsers, loginUser, predict } from '../controller/userController.js';
 import authenticateToken from '../middleware/auth.js';
 const Router = express.Router();
 
@@ -10,4 +10,6 @@ Router.post('/login', loginUser);
 Router.get('/profile', authenticateToken, (req, res) => {
     res.send(req.user);
 });
+Router.post('/predict', predict);
+
 export default Router;

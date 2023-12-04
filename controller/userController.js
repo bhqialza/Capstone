@@ -3,10 +3,14 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../middleware/sendEmail.js";
+import axios from "axios";
+import multer from "multer";
+import FormData from "form-data";
 
 dotenv.config();
 const saltRounds = process.env.SALT || 10;
 const salt = bcrypt.genSaltSync(saltRounds);
+const storage = multer.memoryStorage();
 
 // export const createUser = async (req, res) => {
 //     try {
@@ -188,4 +192,29 @@ export const getUsers = async (req, res) => {
     } catch (error) {
         console.log(error.message);
     }
+}
+
+export const predict = async (req, res) => {
+    try {
+        const file = req.files.imgFile;
+        const formData = new FormData();
+        formData.append('imgFile', file.data, file.name);
+        const response = await axios.post('https://api-ml-bw6dhamona-et.a.run.app/predict', formData, {
+            headers: {
+                'Content-Type': `multipart/form-data'`,
+            }
+        });
+        console.log(response.data.result.class);
+        return res.status(200).json({
+            status: "success",
+            data: response.data
+
+        })
+
+
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+
 }
