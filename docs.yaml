@@ -15,7 +15,6 @@ security:
 tags:
   - name: users
     description: Operations available to regular users
-
 paths:
   /:
     get:
@@ -45,9 +44,41 @@ paths:
         '201':
           description: User created
         '400':
-          description: 'Please fill all fields, or user already exists'
+          description: 'Please fill all fields or failed to create user'
+        '422':
+          description: password and confirm password does not match
         '409':
           description: Email already exists
+  
+  # /user/verify:
+  #   post:
+  #     tags:
+  #       - users
+  #     summary: Verify user
+  #     operationId: verifyUser
+  #     description: Verify user
+  #     parameters:
+  #       - name: email
+  #         in: query
+  #         description: email
+  #         required: true
+  #         schema:
+  #           type: string
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/verify'
+  #     responses:
+  #       '200':
+  #         description: User verified
+  #       '400':
+  #         description: 'Please fill all fields, Wrong otp, or failed to verify user'
+  #       '401':
+  #         description: Invalid credentials
+  #       '404':
+  #         description: user does not exist
                 
   /user/login:
     post:
@@ -69,18 +100,10 @@ paths:
           description: 'Please fill all fields, or user already exists'
         '401':
           description: Invalid credentials
-  /user/getusers:
-    get:
-      tags:
-        - users
-      summary: Get all users
-      operationId: getUsers
-      description: Get all users
-      responses:
-        '200':
-          description: All users
-
-    /user/profile:
+        '404': 
+          description: email does not exist or user is not verified
+          
+  /user/profile:
     get:
       tags:
         - users
@@ -93,122 +116,53 @@ paths:
         '200':
           description: User profile
         '401':
-          description: Invalid credentials
-    
-  /user/verify:
-    post:
+          description: Unautorizhed
+          
+  /user/getusers:
+    get:
       tags:
         - users
-      summary: Verify user
-      operationId: verifyUser
-      description: Verify user
-      parameters:
-        - name: email
-          in: query
-          description: email
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/verify'
+      summary: Get all users
+      operationId: getUsers
+      description: Get all users
+      security:
+        - bearerAuth: []
       responses:
         '200':
-          description: User verified
-        '400':
-          description: 'Please fill all fields, or user already exists'
+          description: All users
         '401':
-          description: Invalid credentials
-
-  /user/forgotpassword:
+          description: Unautorizhed    
+  /user/predict:
+    # post file emage
     post:
       tags:
         - users
-      summary: Forgot password
-      operationId: forgotPassword
-      description: Forgot password
+      summary: Predict image
+      operationId: predictImage
+      description: Predict image
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserPredict'
       responses:
         '200':
-          description: User verified
-        '400':
-          description: 'Please fill all fields, or user already exists'
+          description: Predicted image
         '401':
-          description: Invalid credentials
+          description: Unautorizhed
 
-  /user/resetpassword:
-    post:
-      tags:
-        - users
-      summary: Reset password
-      operationId: resetPassword
-      description: Reset password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: User verified
-        '400':
-          description: 'Please fill all fields, or user already exists'
-        '401':
-          description: Invalid credentials
 
-  /user/changepassword:
-    post:
-      tags:
-        - users
-      summary: Change password
-      operationId: changePassword
-      description: Change password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: User verified
-        '400':
-          description: 'Please fill all fields, or user already exists'
-        '401':
-          description: Invalid credentials
 
-  /user/updateprofile:
-    post:
-      tags:
-        - users
-      summary: Update profile
-      operationId: updateProfile
-      description: Update profile
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description:
-
+          
 components:
+  
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
   schemas:
     UserLogin:
       type: object
@@ -253,13 +207,24 @@ components:
           format: password
           example: password123
     
-    verify:
+    # verify:
+    #   type: object
+    #   required:
+    #     - otp
+    #   properties:
+    #     otp:
+    #       type: string
+    #       format: number
+    #       example: 123456
+
+    UserPredict:
       type: object
       required:
-        - otp
+        - imgFile
       properties:
-        otp:
+        imgFile:
           type: string
-          format: number
-          example: 123456
+          format: binary
+          example: image.jpg
+
 

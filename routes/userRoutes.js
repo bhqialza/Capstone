@@ -10,6 +10,6 @@ Router.post('/login', loginUser);
 Router.get('/profile', authenticateToken, (req, res) => {
     res.send(req.user);
 });
-Router.post('/predict', predict);
+Router.post('/predict', authenticateToken, predict);
 
 export default Router;
