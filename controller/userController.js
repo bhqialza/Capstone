@@ -204,7 +204,6 @@ export const predict = async (req, res) => {
                 'Content-Type': `multipart/form-data'`,
             }
         });
-        console.log(response.data.result.class);
         return res.status(200).json({
             status: "success",
             data: response.data
