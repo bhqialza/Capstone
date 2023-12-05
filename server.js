@@ -5,12 +5,15 @@ import userRoutes from './routes/userRoutes.js'
 import ejs from 'ejs'
 import fileUpload from "express-fileupload"
 import cors from 'cors'
+
+
 app.set('view engine', 'ejs')
 app.set('views', './views')
+app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-    res.send('API RUNNING!')
+    res.render('index')
 });
 app.use(cors())
 app.use(express.json())
