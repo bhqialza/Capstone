@@ -1,9 +1,9 @@
 # Cloud Computing Branch
+![Cloud Computing](https://play-lh.googleusercontent.com/RyoQTmHnxsxPYabsETmWVXHtLorVh_yOO48hsdv2VmI-Uki4qt5c5vV1cicJODV56A4=w600-h300-pc0xffffff-pd)
 
 ## Introduction
 
-- ## [🌥&nbsp;&nbsp;API Docs &rarr;](https://app.swaggerhub.com/apis-docs/LANGARIRANO/capstone/)
-
+- ## [📑&nbsp;&nbsp;API Docs &rarr;](https://app.swaggerhub.com/apis-docs/LANGARIRANO/capstone/)
 ## Installation
 
 To install the backend application, follow these steps:
