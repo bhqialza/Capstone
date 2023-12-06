@@ -206,11 +206,17 @@ export const predict = async (req, res) => {
             }
         });
         const cekProduct = await Product.findAll({ where: { category: response.data.result.class } });
+        const dataProduct = {
+            category: cekProduct[0].category,
+            name: cekProduct[0].name,
+            img: cekProduct[0].img,
+            steps: cekProduct[0].steps
+        }
         if (cekProduct.length > 0) {
             return res.status(200).json({
                 status: "success",
                 msg: "product found",
-                product: cekProduct
+                product: dataProduct
             })
         }
         else {
@@ -219,9 +225,6 @@ export const predict = async (req, res) => {
                 msg: "product not found"
             })
         }
-
-
-
     }
     catch (error) {
         console.log(error.message);
