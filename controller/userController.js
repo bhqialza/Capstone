@@ -206,12 +206,13 @@ export const predict = async (req, res) => {
             }
         });
         const cekProduct = await Product.findAll({ where: { category: response.data.result.class } });
-        const dataProduct = {
-            category: cekProduct[0].category,
-            name: cekProduct[0].name,
-            img: cekProduct[0].img,
-            steps: cekProduct[0].steps
-        }
+        const dataProduct = cekProduct.map((item) => {
+            return {
+                name: item.name,
+                img: item.img,
+                steps: item.steps
+            }
+        })
         if (cekProduct.length > 0) {
             return res.status(200).json({
                 status: "success",
