@@ -12,6 +12,6 @@ Router.get('/profile', authenticateToken, (req, res) => {
     res.send(req.user);
 });
 Router.post('/predict', authenticateToken, predict);
-Router.post('/product', addProduct)
+Router.post('/addproduct', addProduct)
 
 export default Router;
