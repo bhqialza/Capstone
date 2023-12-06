@@ -1,5 +1,6 @@
 import express from 'express';
 import { createUser, getUsers, loginUser, predict } from '../controller/userController.js';
+import { addProduct } from "../controller/productController.js"
 import authenticateToken from '../middleware/auth.js';
 const Router = express.Router();
 
@@ -11,5 +12,6 @@ Router.get('/profile', authenticateToken, (req, res) => {
     res.send(req.user);
 });
 Router.post('/predict', authenticateToken, predict);
+Router.post('/product', addProduct)
 
 export default Router;

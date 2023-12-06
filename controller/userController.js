@@ -1,4 +1,5 @@
 import User from "../model/userModel.js";
+import Product from "../model/productModel.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -204,11 +205,21 @@ export const predict = async (req, res) => {
                 'Content-Type': `multipart/form-data'`,
             }
         });
-        return res.status(200).json({
-            status: "success",
-            data: response.data
+        const cekProduct = await Product.findAll({ where: { category: response.data.result.class } });
+        if (cekProduct.length > 0) {
+            return res.status(200).json({
+                status: "success",
+                msg: "product found",
+                product: cekProduct
+            })
+        }
+        else {
+            return res.status(404).json({
+                status: "fail",
+                msg: "product not found"
+            })
+        }
 
-        })
 
 
     }
