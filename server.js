@@ -1,6 +1,6 @@
 import express from "express"
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 import userRoutes from './routes/userRoutes.js'
 import ejs from 'ejs'
 import fileUpload from "express-fileupload"
