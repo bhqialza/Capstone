@@ -63,8 +63,8 @@ const storage = multer.memoryStorage();
 
 export const createUser = async (req, res) => {
     try {
-        const { username, email, phone, password, confirmPassword } = req.body;
-        if (!username || !email || !phone || !password || !confirmPassword) {
+        const { username, email, password, confirmPassword } = req.body;
+        if (!username || !email || !password || !confirmPassword) {
             return res.status(400).json({
                 status: "fail",
                 msg: "please fill all fields"
@@ -81,7 +81,6 @@ export const createUser = async (req, res) => {
             const data = {
                 username,
                 email,
-                phone,
                 password: await bcrypt.hash(password, salt)
             }
             const response = await User.create(data);

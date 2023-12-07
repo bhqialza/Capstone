@@ -19,7 +19,6 @@ const { DataTypes } = Sequelize;
 const User = db.define('tbl_users', {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
-    phone: DataTypes.STRING,
     password: DataTypes.STRING,
 }, {
     freezeTableName: true,
