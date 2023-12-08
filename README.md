@@ -1,5 +1,5 @@
 <h1 align="center">TrashArt</h1>
-Tokopedia, Gojek, & Traveloka</a> program.</p>
+<p align="center">Project for fulfill the <a href="https://grow.google/intl/id_id/bangkit/?tab=machine-learning">Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka</a> program.</p>
 
 <h2>Team Members</h2>
 <h3>Team ID : CH2-PS312</h3>
