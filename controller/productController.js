@@ -9,7 +9,6 @@ export const addProduct = async (req, res) => {
     try {
         const docRef = dbFirestore.collection('products').doc();
         const newProduct = {
-            id: docRef.id,
             category,
             name,
             img,
