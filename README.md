@@ -1,4 +1,6 @@
 <h1 align="center">TrashArt</h1>
+<h3 align="center">Waste management and recycling app. We've got you covered!</h3>
+<p align="center"><img src="https://github.com/bhqialza/Capstone/blob/CloudComputing/assets/logoo.png"></p>
 <p align="center">Project for fulfill the <a href="https://grow.google/intl/id_id/bangkit/?tab=machine-learning">Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka</a> program.</p>
 
 <h2>Team Members</h2>
@@ -55,3 +57,13 @@ According to data from the Ministry of Environment and Forestry's National Waste
 <h3>REST API Documentation</h3>
 <a href="https://app.swaggerhub.com/apis-docs/LANGARIRANO/capstone/1.0.0#/">Here for REST API Documentation</a>
 <p> </p>
+<h2>Contact</h2>
+
+| Name                         | Contact                                                                                                                                                                                                                                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Alidza Septia Wulansari | <a href="https://www.linkedin.com/in/alidzaseptia"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="alidzaseptya.wulan@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>         |
+| Felixiano Bala Koten              | <a href="https://www.linkedin.com/in/ian-koten-162901209?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="felixianok@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a> |
+| Rubens Juristanto     | <a href="https://www.linkedin.com/in/rubensjuristanto"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="rubens.juristanto4@gmail.com><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>                       |
+| Taufik Qurrahman                      | <a href="https://www.linkedin.com/in/taufik-qurrahman-177932290"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="taufikfinafiza20@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>                    |
+| Yosep Firano La Ngari         | <a href="https://www.linkedin.com/in/ranolangari/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="langarirano@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>                |
+| M. Baihaqi Alza                        | <a href="https://www.linkedin.com/in/bhqialza/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> <a href="baihaqialza1289@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>                       |
