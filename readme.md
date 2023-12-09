@@ -3,6 +3,8 @@
 
 ## Introduction
 
+![Schema](./public/assets/schema.png)
+
 - ## [📑&nbsp;&nbsp;API Docs &rarr;](https://app.swaggerhub.com/apis-docs/LANGARIRANO/capstone/)
 ## Installation
 
