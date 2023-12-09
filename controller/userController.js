@@ -1,5 +1,5 @@
 import User from "../model/userModel.js";
-import Product from "../model/productModel.js";
+import dbFirestore from "../middleware/dbFirestore.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -7,6 +7,7 @@ import { sendEmail } from "../middleware/sendEmail.js";
 import axios from "axios";
 import multer from "multer";
 import FormData from "form-data";
+import db from "../middleware/db.js";
 
 dotenv.config();
 const saltRounds = process.env.SALT || 10;
@@ -204,25 +205,22 @@ export const predict = async (req, res) => {
                 'Content-Type': `multipart/form-data'`,
             }
         });
-        const cekProduct = await Product.findAll({ where: { category: response.data.result.class } });
-        const dataProduct = cekProduct.map((item) => {
-            return {
-                name: item.name,
-                img: item.img,
-                steps: item.steps
-            }
-        })
-        if (cekProduct.length > 0) {
-            return res.status(200).json({
-                status: "success",
-                msg: "product found",
-                product: dataProduct
-            })
-        }
-        else {
+        const category = response.data.result.class
+        const cekProduct = await dbFirestore.collection('products').where('category', '==', category).get();
+        if (cekProduct.empty) {
             return res.status(404).json({
                 status: "fail",
                 msg: "product not found"
+            })
+        }
+        else {
+            const products = [];
+            cekProduct.forEach(doc => {
+                products.push(doc.data());
+            });
+            return res.status(200).json({
+                status: "success",
+                products
             })
         }
     }

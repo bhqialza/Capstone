@@ -1,4 +1,4 @@
-import Product from "../model/productModel.js";
+import dbFirestore from "../middleware/dbFirestore.js";
 
 export const addProduct = async (req, res) => {
     const { category, name, img, steps } = req.body;
@@ -7,15 +7,20 @@ export const addProduct = async (req, res) => {
         msg: "Please fill all the fields"
     })
     try {
-        const product = await Product.create({ category, name, img, steps });
-        if (!product) return res.status(400).json({
-            status: "fail",
-            msg: "failed to add product"
-        })
+        const docRef = dbFirestore.collection('products').doc();
+        const newProduct = {
+            id: docRef.id,
+            category,
+            name,
+            img,
+            steps
+        }
+        await docRef.set(newProduct);
         return res.status(200).json({
             status: "success",
             msg: "product added successfully"
         })
+
     } catch (error) {
         console.log(error.message);
     }
