@@ -42,6 +42,8 @@ def predict():
 
         top_class = np.argmax(prediction)
         top_prob = prediction[0][top_class]
+        #remove file after prediction
+        os.remove(img_path)
 
         return jsonify({
             "status": {
@@ -53,7 +55,7 @@ def predict():
                 "confidence": float(top_prob)
             }
         })
-
+    
     return jsonify({
         "status": {
             "code": 400,
