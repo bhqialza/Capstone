@@ -1,6 +1,6 @@
 <h1 align="center">TrashArt</h1>
 <h3 align="center">Waste management and recycling app. We've got you covered!</h3>
-<p align="center"><img src="https://github.com/bhqialza/Capstone/blob/CloudComputing/assets/logoo.png"></p>
+<p align="center"><img src="https://drive.google.com/file/d/1jGB_bQBvMwGU4nHE_Tc-QYIZsVeYVMr5/view?usp=drive_link"></p>
 <p align="center">Project for fulfill the <a href="https://grow.google/intl/id_id/bangkit/?tab=machine-learning">Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka</a> program.</p>
 
 <h2>Team Members</h2>
