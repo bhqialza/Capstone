@@ -112,6 +112,12 @@ export const predict = async (req, res) => {
                 'Content-Type': `multipart/form-data'`,
             }
         });
+        if (response.data.result.confidence < 0.7) {
+            return res.status(404).json({
+                status: "fail",
+                msg: "product not found"
+            })
+        }
         const category = response.data.result.class
         const cekProduct = await dbFirestore.collection('products').where('category', '==', category).get();
         if (cekProduct.empty) {
