@@ -117,7 +117,7 @@ export const predict = async (req, res) => {
       }
     );
     if (response.data.result.confidence < 0.7) {
-      return res.status(404).json({
+      return res.status(400).json({
         status: "fail",
         msg: "Mohon Maaf, gambar yang anda masukan tidak dapat diproses",
       });
