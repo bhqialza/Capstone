@@ -105,6 +105,7 @@ export const getUsers = async (req, res) => {
 export const predict = async (req, res) => {
   try {
     const file = req.files.imgFile;
+    const email = req.user.email;
     const formData = new FormData();
     formData.append("imgFile", file.data, file.name);
     const response = await axios.post(
@@ -137,11 +138,56 @@ export const predict = async (req, res) => {
       cekProduct.forEach((doc) => {
         products.push(doc.data());
       });
+
+      const data = {
+        email,
+        category,
+        date: new Date(),
+        product: products,
+      };
+      const docRef = await dbFirestore.collection("history").add(data);
+      if (!docRef)
+        return res.status(400).json({
+          status: "fail",
+          msg: "failed to add history",
+        });
+
       return res.status(200).json({
         status: "success",
         products,
       });
     }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const historyPredict = async (req, res) => {
+  try {
+    const email = req.user.email;
+    const history = [];
+    const snapshot = await dbFirestore
+      .collection("history")
+      .where("email", "==", email)
+      .get();
+    if (snapshot.empty) {
+      return res.status(404).json({
+        status: "fail",
+        msg: "history not found",
+      });
+    }
+    snapshot.forEach((doc) => {
+      history.push(doc.data());
+    });
+    const data = [];
+    history.forEach((doc) => {
+      const { date, product } = doc;
+      data.push({ date: date.toDate(), product });
+    });
+    return res.status(200).json({
+      status: "success",
+      data,
+    });
   } catch (error) {
     console.log(error.message);
   }
