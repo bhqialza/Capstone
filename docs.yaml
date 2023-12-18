@@ -1,32 +1,19 @@
 openapi: 3.0.0
 servers:
-  # Added by API Auto Mocking Plugin
+  - description: TrashArt API
+    url: https://backend-bw6dhamona-et.a.run.app/
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/LANGARIRANO/capstone/1.0.0
-  - description: TrashArt API
-    url: https://protected-wildwood-76190-32f8f3b83dd9.herokuapp.com/
 info:
   description: This is a TrashArt API
   version: "1.0.0"
   title: TrashArt API
-
 security:
   - bearerAuth: []
 tags:
   - name: users
     description: Operations available to regular users
 paths:
-  /:
-    get:
-      tags:
-        - users
-      summary: index
-      operationId: checkAPI
-      description: index
-      responses:
-        '200':
-          description: API RUNNING
-
   /user/register:
     post:
       tags:
@@ -39,17 +26,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/register'
+              $ref: "#/components/schemas/register"
       responses:
-        '201':
+        "201":
           description: User created
-        '400':
-          description: 'Please fill all fields or failed to create user'
-        '422':
+        "400":
+          description: "Please fill all fields or failed to create user"
+        "422":
           description: password and confirm password does not match
-        '409':
+        "409":
           description: Email already exists
-  
+
   # /user/verify:
   #   post:
   #     tags:
@@ -79,7 +66,7 @@ paths:
   #         description: Invalid credentials
   #       '404':
   #         description: user does not exist
-                
+
   /user/login:
     post:
       tags:
@@ -92,46 +79,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserLogin'
+              $ref: "#/components/schemas/UserLogin"
       responses:
-        '200':
+        "200":
           description: User logged in
-        '400':
-          description: 'Please fill all fields, or user already exists'
-        '401':
+        "400":
+          description: "Please fill all fields, or user already exists"
+        "401":
           description: Invalid credentials
-        '404': 
+        "404":
           description: email does not exist or user is not verified
-          
-  /user/profile:
-    get:
-      tags:
-        - users
-      summary: Get user profile
-      operationId: getUserProfile
-      description: Get user profile
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: User profile
-        '401':
-          description: Unautorizhed
-          
-  /user/getusers:
-    get:
-      tags:
-        - users
-      summary: Get all users
-      operationId: getUsers
-      description: Get all users
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: All users
-        '401':
-          description: Unautorizhed    
+
   /user/predict:
     # post file emage
     post:
@@ -140,30 +98,89 @@ paths:
       summary: Predict image
       operationId: predictImage
       description: Predict image
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/UserPredict'
+              $ref: "#/components/schemas/UserPredict"
       responses:
-        '200':
+        "200":
           description: Predicted image
-        '401':
+        "401":
           description: Unautorizhed
 
+  /user/addproduct:
+    # post file emage
+    post:
+      tags:
+        - users
+      summary: add product
+      operationId: addProduct
+      description: add product
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Addproduct"
+      responses:
+        "200":
+          description: product added succesfully
+        "401":
+          description: Unautorizhed
 
+  /user/history:
+    get:
+      tags:
+        - users
+      summary: get history
+      operationId: get history
+      description: get history
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: history
+        "401":
+          description: Unautorizhed
 
-          
 components:
-  
   securitySchemes:
-    bearerAuth:
+    bearerAuth: # arbitrary name for the security scheme
       type: http
       scheme: bearer
       bearerFormat: JWT
-
   schemas:
+    Addproduct:
+      type: object
+      required:
+        - category
+        - name
+        - img
+        - steps
+      properties:
+        category:
+          type: string
+          format: text
+          example: gelas/botol kaca
+        name:
+          type: string
+          format: text
+          example: Vas Bunga
+        img:
+          type: string
+          format: text
+          example: https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/cewekbangetfoto/original/3081_diy-cara-membuat-vas-bunga-dari-botol-bekas-dan-masking-tape.jpg
+        steps:
+          type: string
+          format: text
+          example: Cara membuat kerajinan dari botol bekas ini membutuhkan bahan-bahan lain seperti selotip dan cat warna (dipilih berdasarkan selera). Mulanya, berikan selotip ke botol sesuai bentuk dan motif yang Anda inginkan. Kemudian, pulas dengan cat dan tunggu hingga mengering. Begitu tak ada lagi bagian yang basah, lepaskan selotip dari badan botol. Jadilah vas bunga yang Anda inginkan! Nah bila bingung untuk mewarnainya, dibiarkan polos juga tetap cantik kok!
+
     UserLogin:
       type: object
       required:
@@ -178,14 +195,13 @@ components:
           type: string
           format: password
           example: password123
-          
+
     register:
       type: object
       required:
         - username
         - email
         - password
-        - phone
         - confirmPassword
       properties:
         username:
@@ -195,9 +211,6 @@ components:
           type: string
           format: email
           example: example@example.com
-        phone:
-          type: string
-          example: "081234567890"
         password:
           type: string
           format: password
@@ -206,7 +219,7 @@ components:
           type: string
           format: password
           example: password123
-    
+
     # verify:
     #   type: object
     #   required:
@@ -226,5 +239,3 @@ components:
           type: string
           format: binary
           example: image.jpg
-
-
