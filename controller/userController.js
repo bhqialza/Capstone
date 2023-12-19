@@ -62,7 +62,7 @@ export const loginUser = async (req, res) => {
           { email: user.data().email, username: user.data().username },
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: "7d" }
-        ); // expires in 1 hour
+        );
         return res.status(200).json({
           status: "success",
           msg: "login successful",
@@ -188,6 +188,27 @@ export const historyPredict = async (req, res) => {
       status: "success",
       data,
     });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const profileUser = async (req, res) => {
+  try {
+    const email = req.user.email;
+    const user = await dbFirestore.collection("users").doc(email).get();
+    if (user.exists) {
+      const { username, email } = user.data();
+      return res.status(200).json({
+        status: "success",
+        data: { username, email },
+      });
+    } else {
+      return res.status(404).json({
+        status: "fail",
+        msg: "user not found",
+      });
+    }
   } catch (error) {
     console.log(error.message);
   }

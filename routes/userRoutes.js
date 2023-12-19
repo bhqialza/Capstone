@@ -5,6 +5,7 @@ import {
   loginUser,
   predict,
   historyPredict,
+  profileUser,
 } from "../controller/userController.js";
 import { addProduct } from "../controller/productController.js";
 import authenticateToken from "../middleware/auth.js";
@@ -13,9 +14,7 @@ const Router = express.Router();
 Router.post("/register", createUser);
 // Router.get("/getUsers", getUsers);
 Router.post("/login", loginUser);
-Router.get("/profile", authenticateToken, (req, res) => {
-  res.send(req.user);
-});
+Router.get("/profile", authenticateToken, profileUser);
 Router.post("/predict", authenticateToken, predict);
 Router.post("/addproduct", addProduct);
 Router.get("/history", authenticateToken, historyPredict);
