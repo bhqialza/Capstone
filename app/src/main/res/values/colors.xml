@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>ro
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_color">#35D349</color>
+    <color name="grey">#7D7C7C</color>
+<!--    <color name="secondary_color">#1A5D1A</color>-->
+    <color name="secondary_color">#54E346</color>
+    <color name="onSecondary_color">#304D30</color>
+    <color name="secondaryOn_color">#65B741</color>
+    <color name="secondaryVariant_color">#163020</color>
+    <color name="secondaryOnVariant_color">#CDFAD5</color>
+    <color name="lightRed">#E57373</color>
+</resources>

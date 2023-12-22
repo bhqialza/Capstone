@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "456558132026",
+    "project_id": "dumydumycapst",
+    "storage_bucket": "dumydumycapst.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456558132026:android:1b9223009230a9b8386e03",
+        "android_client_info": {
+          "package_name": "com.alidza.dumydumycapst"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfipvQq5o0z6PLOOy2n9QL9BC0PoKUbfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

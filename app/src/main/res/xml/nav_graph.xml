@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/scanFragment">
+
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.alidza.dumydumycapst.dashboard.ScanFragment"
+        android:label="Scan Fragment"
+        tools:layout="@layout/fragment_scan" />
+
+    <action
+        android:id="@+id/action_dashboard_to_scanFragment"
+        app:destination="@id/scanFragment" />
+
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.yourpackage.DetailFragment"
+        android:label="DetailFragment">
+
+        <argument
+            android:name="status"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_detailFragment_to_uploadFragment"
+            app:destination="@id/scanFragment" />
+
+    </fragment>
+
+</navigation>
+

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TrashArt</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_upload">Upload</string>
+    <string name="label_logo">Label logo</string>
+    <string name="hasil_kerajinan">Hasil kerajinan</string>
+    <string name="img_art">img_art</string>
+    <string name="pengaturan_profil">Pengaturan</string>
+    <string name="ubah_bahasa_setting">Ubah Bahasa</string>
+    <string name="lihat_disini_setting">Lihat disini</string>
+    <string name="logo_app">Logo App</string>
+</resources>
